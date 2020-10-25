@@ -35,9 +35,7 @@
     "lint:prettier": "prettier --ignore-path .gitignore --check '**/*.{js,json,md}'"
   },
   "dependencies": {
-    "html-minifier": "^4.0.0",
-    "json-stable-stringify": "^1.0.1",
-    "pretty-data": "^0.40.0"
+    "json-stable-stringify": "^1.0.1"
   },
   "devDependencies": {
     "eslint-config-udes": "^0.4.3",
