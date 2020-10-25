@@ -24,7 +24,9 @@
   "main": ".eleventy.js",
   "files": [
     ".eleventy.js",
-    "src/files-minifier.js"
+    "src/javascript-comments.js",
+    "src/print-javascript.js",
+    "src/to-javascript.js"
   ],
   "scripts": {
     "format": "npm-run-all format:*",
