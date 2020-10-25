@@ -5,11 +5,13 @@ This **[Eleventy](https://www.11ty.dev/)** plugin add useful shortcodes to JavaS
 Here a brief introduction to these shortcodes:
 
 - **To JavaScript**:
+
   - `toJavaScript`: general shortcode that will either call `toJavaScriptArray` or `toJavaScriptObject` shortcodes
   - `toJavaScriptArray`: return the content of a JavaScript array
   - `toJavaScriptObject`: return the content of a JavaScript object
 
 - **Print JavaScript**:
+
   - `printJavaScriptArray`: print an array of JavaScript instructions
 
 - **JavaScript comments**:
@@ -36,23 +38,27 @@ module.exports = (eleventyConfig) => {
 ```
 
 ## Usage
+
 ### `toJavaScript`, `toJavaScriptArray` and `toJavaScriptObject`
+
 Do you have some data that you want to access as JavaScript variables?
 The three following shortcodes will help you to do that, by removing
-  the `[` and `]` of an JSON.stringify array (**toJavaScriptArray**) or
-  the `{`, and `}` of an JSON.stringify object (**toJavaScriptObject**).
+the `[` and `]` of an JSON.stringify array (**toJavaScriptArray**) or
+the `{`, and `}` of an JSON.stringify object (**toJavaScriptObject**).
 
 If you do not want to embarrass yourself with two shortcodes,
 you can only use the **toJavaScript** shortcode that will handle the two cases.
 
 Each of these shortcodes takes the following parameters:
-  1. The object or the array to print as JavaScript
-  2. (optional) Properties of the object(s) to keep,
-     useful to keep only some properties instead of the whole object(s)
+
+1. The object or the array to print as JavaScript
+2. (optional) Properties of the object(s) to keep,
+   useful to keep only some properties instead of the whole object(s)
 
 It will also output the function name on the commented line, to help you to debug.
 
 #### `toJavaScriptObject` example
+
 ```javascript
 this.author = {
   // {% toJavaScriptObject author %}
@@ -61,9 +67,9 @@ this.author = {
 // will output
 this.author = {
   // toJavaScriptObject
-  lastname: 'Bloe',
-  name: 'Joe',
-  url: /'joe-bloe',
+  lastname: "Bloe",
+  name: "Joe",
+  url: "/joe-bloe",
 };
 ```
 
@@ -75,12 +81,13 @@ this.author = {
 // will output
 this.author = {
   // toJavaScriptObject
-  lastname: 'Bloe',
-  name: 'Joe',
+  lastname: "Bloe",
+  name: "Joe",
 };
 ```
 
 #### `toJavaScriptArray` examples
+
 ```javascript
 this.navigation = [
   // {% toJavaScriptArray site.navigation %}
@@ -89,7 +96,8 @@ this.navigation = [
 // will output
 this.navigation = [
   // toJavaScriptArray
-  { label: 'Page 1', url: '/page-1' }, { label: 'Page 2', url: '/page-2' }
+  { label: "Page 1", url: "/page-1" },
+  { label: "Page 2", url: "/page-2" },
 ];
 ```
 
@@ -101,15 +109,18 @@ this.navigation = [
 // will output
 this.navigation = [
   // toJavaScriptArray
-  { url: '/page-1' }, { url: '/page-2' }
+  { url: "/page-1" },
+  { url: "/page-2" },
 ];
 ```
 
 ### `printJavaScriptArray`
+
 If you have valid JavaScript instructions that are stored in an array,
 this shortcode will print it correctly.
 
 Here an example where I want to add `imports` only on certain files:
+
 ```javascript
 /*---
   imports:
@@ -117,15 +128,19 @@ Here an example where I want to add `imports` only on certain files:
 ---*/
 
 // And in my JavaScript template file:
-import { html, css, LitElement } from 'lit-element';
+import { html, css, LitElement } from "lit-element";
 // {% printJavaScriptArray post.imports %}
+```
 
-// will output
-import { html, css, LitElement } from 'lit-element';
-import '@justinribeiro/code-block';
+will output
+
+```javascript
+import { html, css, LitElement } from "lit-element";
+import "@justinribeiro/code-block";
 ```
 
 ### `startJavaScriptComment` and `closeJavaScriptComment`
+
 Do you have some code that should exist only in your development environment?
 These shortcodes allow you to ship only the code intended to production environment!
 

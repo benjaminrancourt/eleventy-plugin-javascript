@@ -1,9 +1,9 @@
 module.exports = {
-  printJavaScriptArray:(array) => {
-    if (!array || !array.length) return '';
+  printJavaScriptArray: (array) => {
+    if (!array || !array.length) return "";
 
     return `printJavaScriptArray
-      ${array.join('\\n')}
+      ${array.join("\\n")}
     `;
   },
-}
+};
