@@ -1,5 +1,5 @@
 const javascriptCommentsShortcodes = require("./src/javascript-comments");
-const toJavascriptShortcodes = require("./src/javascript-comments");
+const toJavascriptShortcodes = require("./src/to-javascript");
 const printJavascriptShortcodes = require("./src/print-javascript");
 
 module.exports = (eleventyConfig) => {
