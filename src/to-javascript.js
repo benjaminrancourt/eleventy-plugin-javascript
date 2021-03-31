@@ -1,12 +1,18 @@
-const jsonStableStringify = require("json-stable-stringify");
+const jsonStableStringify = require('json-stable-stringify');
 
 const addPropertyToObject = (object, newObject) => (property) => (newObject[property] = object[property]);
 const stringify = (object) => jsonStableStringify(object, { space: 2 });
 const slice = (string) => string.slice(1, string.length - 1);
 
 const toObject = (properties) => (object) => {
-  const newObject = {};
-  properties.forEach(addPropertyToObject(object, newObject));
+  let newObject = {};
+
+  if (properties) {
+    properties.forEach(addPropertyToObject(object, newObject));
+  } else {
+    newObject = JSON.parse(JSON.stringify(object));
+  }
+
   return newObject;
 };
 
@@ -22,16 +28,16 @@ const toJavaScriptArray = (objects, properties) => {
   return slice(javaScriptArray);
 };
 
-const getProperties = (object, propertiesAsString) => {
-  if (propertiesAsString) return propertiesAsString.split(",");
-  return Object.keys(object);
+const getProperties = (propertiesAsString) => {
+  if (propertiesAsString) return propertiesAsString.split(',');
+  return null;
 };
 
 module.exports = {
   toJavaScript: (object, propertiesAsString) => {
-    if (!object) return "";
+    if (!object) return '';
 
-    const properties = getProperties(object, propertiesAsString);
+    const properties = getProperties(propertiesAsString);
     const toJavaScriptFunction = Array.isArray(object) ? toJavaScriptArray : toJavaScriptObject;
     return `toJavaScript
       ${toJavaScriptFunction(object, properties)}
@@ -39,18 +45,18 @@ module.exports = {
   },
 
   toJavaScriptArray: (objects, propertiesAsString) => {
-    if (!objects || !objects.length) return "";
+    if (!objects || !objects.length) return '';
 
-    const properties = getProperties(objects[0], propertiesAsString);
+    const properties = getProperties(propertiesAsString);
     return `toJavaScriptArray
       ${toJavaScriptArray(objects, properties)}
     `;
   },
 
   toJavaScriptObject: (object, propertiesAsString) => {
-    if (!object) return "";
+    if (!object) return '';
 
-    const properties = getProperties(object, propertiesAsString);
+    const properties = getProperties(propertiesAsString);
     return `toJavaScriptObject
       ${toJavaScriptObject(object, properties)}
     `;
